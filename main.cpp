@@ -1,8 +1,9 @@
 #include <iostream>
+#include <random>
 
 using namespace std;
 
-bool calculateScore(string p1, string p2, int &p1score, int &p2score)
+bool calculateScore(const string &p1, const string &p2, int &p1score, int &p2score)
 {
 
     if (p1 != "cooperate" && p1 != "defect")
@@ -43,6 +44,17 @@ bool calculateScore(string p1, string p2, int &p1score, int &p2score)
     return false;
 }
 
+string computerMove(const int x)
+{
+    // strategy selector using x
+    if (x == 1)
+        return "cooperate";
+    else if (x == 2)
+        return "defect";
+
+    return "NULL";
+}
+
 int main()
 {
 
@@ -58,6 +70,16 @@ int main()
         return 1;
     }
 
+    int strategy;
+    cout << "Enter the strategy that computer uses in game: (1/2) ";
+    cin >> strategy;
+    if (strategy != 1 && strategy != 2)
+    {
+        cout << "Invalid input for strategy!" << endl;
+        return 1;
+    }
+
+   
     int p1score = 0;
     int p2score = 0;
 
@@ -76,8 +98,7 @@ int main()
         cout << "Enter what p1 wants to do" << endl;
         cin >> p1;
 
-        cout << "Enter what p2 wants to do" << endl;
-        cin >> p2;
+        p2 = computerMove(strategy);
 
         if (calculateScore(p1, p2, p1score, p2score))
         {
@@ -88,6 +109,7 @@ int main()
         else
         {
             cout << "Failure during calculation" << endl;
+            return 1;
         }
     }
 
