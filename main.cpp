@@ -1,5 +1,5 @@
 #include <iostream>
-#include <random>
+#include "Strategy.h"
 
 using namespace std;
 
@@ -44,17 +44,6 @@ bool calculateScore(const string &p1, const string &p2, int &p1score, int &p2sco
     return false;
 }
 
-string computerMove(const int x)
-{
-    // strategy selector using x
-    if (x == 1)
-        return "cooperate";
-    else if (x == 2)
-        return "defect";
-
-    return "NULL";
-}
-
 int main()
 {
 
@@ -71,15 +60,20 @@ int main()
     }
 
     int strategy;
-    cout << "Enter the strategy that computer uses in game: (1/2) ";
+    cout << "Computer strategies: " << endl;
+    cout << "1. Always cooperate " << endl;
+    cout << "2. Always defect " << endl;
+    cout << "3. Random" << endl;
+    cout << "4. Tit for Tat (coming soon)" << endl;
+    cout << "Select computer strategy: ";
+
     cin >> strategy;
-    if (strategy != 1 && strategy != 2)
+    if (strategy < 1 || strategy > 3)
     {
         cout << "Invalid input for strategy!" << endl;
         return 1;
     }
 
-   
     int p1score = 0;
     int p2score = 0;
 
@@ -87,8 +81,7 @@ int main()
 
     while (r--)
     {
-        cout << "------------------------------" << endl;
-        cout << "Basic Prisoner's Dilemma" << endl;
+        cout << "========== Prisoner's Dilemma ==========" << endl;
         cout << "Round " << rounds++ << endl;
         cout << "------------------------------" << endl;
         cout << "Choose (cooperate/defect)" << endl;
