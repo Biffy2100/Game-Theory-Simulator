@@ -4,6 +4,6 @@
 #include <string>
 using namespace std;
 
-string computerMove(const int x);
+string computerMove(const int x, string prevMove);
 
 #endif

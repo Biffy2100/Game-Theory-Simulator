@@ -91,7 +91,7 @@ int main()
         cout << "Enter what p1 wants to do" << endl;
         cin >> p1;
 
-        p2 = computerMove(strategy);
+        p2 = computerMove(strategy,p1);
 
         if (calculateScore(p1, p2, p1score, p2score))
         {

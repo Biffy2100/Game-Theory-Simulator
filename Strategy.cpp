@@ -1,22 +1,28 @@
 #include "Strategy.h"
-#include<random>
+#include <random>
 using namespace std;
 
+static random_device rd;
+static mt19937 gen(rd());
+static uniform_int_distribution<int> dist(1, 2);
 
-string computerMove(const int x)
+string computerMove(const int choice, string prevMove)
 {
     // strategy selector using x
-    if (x == 1)
-        return "cooperate";
-    else if (x == 2)
-        return "defect";
-    else if (x == 3)
+
+    switch (choice)
     {
-        random_device rd;
-        mt19937 mt(rd());
-        uniform_int_distribution<int> dist(1, 2);
-        int randomNum = dist(mt);
+    case 1:
+        return "cooperate";
+    case 2:
+        return "defect";
+    case 3:
+    {
+        int randomNum = dist(gen);
         return (randomNum == 1) ? "cooperate" : "defect";
     }
-    return "NULL";
+    case 4:
+    default:
+        return "NULL";
+    }
 }
