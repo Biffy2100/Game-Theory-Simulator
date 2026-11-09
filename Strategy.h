@@ -4,6 +4,6 @@
 #include <string>
 using namespace std;
 
-string computerMove(const int x, string prevMove);
+string computerMove(const int choice, int roundNum, const string &move, string &prevMove);
 
 #endif

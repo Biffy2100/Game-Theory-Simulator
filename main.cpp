@@ -3,6 +3,8 @@
 
 using namespace std;
 
+string prevMove = "cooperate";
+
 bool calculateScore(const string &p1, const string &p2, int &p1score, int &p2score)
 {
 
@@ -91,7 +93,7 @@ int main()
         cout << "Enter what p1 wants to do" << endl;
         cin >> p1;
 
-        p2 = computerMove(strategy,p1);
+        p2 = computerMove(strategy, rounds, p1, prevMove);
 
         if (calculateScore(p1, p2, p1score, p2score))
         {
