@@ -6,33 +6,43 @@ static random_device rd;
 static mt19937 gen(rd());
 static uniform_int_distribution<int> dist(1, 2);
 
-string computerMove(const int choice, int roundNum, const string &move, string &prevMove)
+string computerMove(const int choice, int roundNum, const string &move, strategyMemory &memory)
 {
     // strategy selector
     switch (choice)
     {
-    case 1:
+    case 1://always cooperate
         return "cooperate";
-    case 2:
+    case 2://always defect
         return "defect";
-    case 3:
+    case 3://random
     {
         int randomNum = dist(gen);
         return (randomNum == 1) ? "cooperate" : "defect";
     }
-    case 4:
+    case 4://tit for tat 
     {
-        string prevMove;
         if (roundNum == 1)
         {
-            prevMove = move;
+            memory.previousMove = move;
             return "cooperate";
         }
         else
         {
-            string result = prevMove;
-            prevMove = move;
-            return result;
+            string temp = memory.previousMove;
+            memory.previousMove = move;
+            return temp;
+        }
+    }
+    case 5:{ //Grudger
+        if(move == "defect"){
+            memory.hasDefected = true;
+        }
+
+        if(memory.hasDefected){
+            return "defect";
+        }else{
+            return "cooperate";
         }
     }
     default:

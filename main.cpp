@@ -3,8 +3,6 @@
 
 using namespace std;
 
-string prevMove = "cooperate";
-
 bool calculateScore(const string &p1, const string &p2, int &p1score, int &p2score)
 {
 
@@ -66,11 +64,12 @@ int main()
     cout << "1. Always cooperate " << endl;
     cout << "2. Always defect " << endl;
     cout << "3. Random" << endl;
-    cout << "4. Tit for Tat (coming soon)" << endl;
+    cout << "4. Tit for Tat " << endl;
+    cout << "5. Grudger " << endl;
     cout << "Select computer strategy: ";
 
     cin >> strategy;
-    if (strategy < 1 || strategy > 3)
+    if (strategy < 1 || strategy > 5)
     {
         cout << "Invalid input for strategy!" << endl;
         return 1;
@@ -81,10 +80,13 @@ int main()
 
     int rounds = 1;
 
+
+    strategyMemory memory;
+
     while (r--)
     {
         cout << "========== Prisoner's Dilemma ==========" << endl;
-        cout << "Round " << rounds++ << endl;
+        cout << "Round " << rounds << endl;
         cout << "------------------------------" << endl;
         cout << "Choose (cooperate/defect)" << endl;
 
@@ -93,7 +95,11 @@ int main()
         cout << "Enter what p1 wants to do" << endl;
         cin >> p1;
 
-        p2 = computerMove(strategy, rounds, p1, prevMove);
+        p2 = computerMove(strategy, rounds, p1, memory);
+
+        cout << "============================" << endl;
+        cout << "Computer chose to " << p2 << endl;
+        cout << "============================" << endl;
 
         if (calculateScore(p1, p2, p1score, p2score))
         {
@@ -106,6 +112,7 @@ int main()
             cout << "Failure during calculation" << endl;
             return 1;
         }
+        rounds++;
     }
 
     cout << "-------------------------------------" << endl;
