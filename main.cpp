@@ -1,4 +1,6 @@
 #include <iostream>
+#include<cassert>
+
 #include "Strategy.h"
 
 using namespace std;
@@ -82,6 +84,7 @@ int main()
 
 
     strategyMemory memory;
+
 
     while (r--)
     {
